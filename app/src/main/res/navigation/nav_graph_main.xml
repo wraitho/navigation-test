@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/navigation_home">
+
+
+    <fragment
+        android:id="@+id/navigation_bookmarks"
+        android:name="br.pedroso.navigationtest.fragments.BookmarksHostFragment"
+        android:label="Bookmarks Host"
+        tools:layout="@layout/fragment_bookmarks_host" />
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="br.pedroso.navigationtest.fragments.HomeHostFragment"
+        android:label="Home Host"
+        tools:layout="@layout/fragment_home_host" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="br.pedroso.navigationtest.fragments.SettingsHostFragment"
+        android:label="Settings Host"
+        tools:layout="@layout/fragment_settings_host" />
+
+
+
+
+
+</navigation>
