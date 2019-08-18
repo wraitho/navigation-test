@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_bookmarks_host"
+    android:id="@+id/navigation_bookmarks"
     app:startDestination="@id/bookmarksFragment">
 
     <fragment
         android:id="@+id/bookmarksFragment"
-        android:name="br.pedroso.navigationtest.fragments.BookmarksFragment"
+        android:name="br.pedroso.navigationtest.bookmarks.BookmarksFragment"
         android:label="Bookmarks"
         tools:layout="@layout/fragment_bookmarks" />
 </navigation>

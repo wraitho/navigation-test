@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">NavigationTest</string>
-    <string name="title_home">Home</string>
+    <string name="title_items">Items</string>
     <string name="title_bookmarks">Bookmarks</string>
     <string name="title_settings">Settings</string>
+    <string name="display_details">Display details</string>
 </resources>
