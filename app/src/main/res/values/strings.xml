@@ -4,4 +4,6 @@
     <string name="title_bookmarks">Bookmarks</string>
     <string name="title_settings">Settings</string>
     <string name="display_details">Display details</string>
+    <string name="open_editor">Open Editor</string>
+    <string name="close_editor">Close Editor</string>
 </resources>

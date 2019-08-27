@@ -4,10 +4,17 @@
     android:id="@+id/main_nav_graph"
     app:startDestination="@id/navigation_items">
 
+    <action
+        android:id="@+id/action_global_open_editor"
+        app:destination="@id/navigation_editor"
+        app:enterAnim="@anim/nav_default_enter_anim" />
+
+    <include app:graph="@navigation/nav_graph_settings" />
+
     <include app:graph="@navigation/nav_graph_items" />
 
     <include app:graph="@navigation/nav_graph_bookmarks" />
 
-    <include app:graph="@navigation/nav_graph_settings" />
+    <include app:graph="@navigation/nav_graph_editor" />
 
 </navigation>
