@@ -19,13 +19,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setupBottomNavigationView()
+        setupOpenEditorButton()
+        addOnChangedDestinationListener()
+    }
+
+    private fun setupBottomNavigationView() {
         bottomNavigationView.setupWithNavController(navigationController)
-
-
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             onNavDestinationSelected(item, navigationController)
         }
+    }
 
+    private fun addOnChangedDestinationListener() {
         navigationController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.editorFragment -> {
@@ -38,7 +45,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        setupOpenEditorButton()
     }
 
     private fun setupOpenEditorButton() {
