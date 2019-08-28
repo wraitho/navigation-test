@@ -3,6 +3,7 @@ package br.pedroso.navigationtest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
@@ -37,10 +38,22 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.editorFragment -> {
                     bottomNavigationView.visibility = View.GONE
+                    sharedElementRoot.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this,
+                            android.R.color.holo_orange_dark
+                        )
+                    )
                     openEditorButton.text = getText(R.string.close_editor)
                 }
                 else -> {
                     bottomNavigationView.visibility = View.VISIBLE
+                    sharedElementRoot.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this,
+                            android.R.color.darker_gray
+                        )
+                    )
                     openEditorButton.text = getText(R.string.open_editor)
                 }
             }
