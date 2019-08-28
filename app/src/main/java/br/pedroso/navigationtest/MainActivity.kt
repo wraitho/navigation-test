@@ -4,8 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,13 +18,34 @@ class MainActivity : AppCompatActivity() {
         Navigation.findNavController(this, R.id.navigationRootFragment)
     }
 
+    private val destinationsWithVisibleToolbar = setOf(
+        R.id.itemsFragment,
+        R.id.bookmarksFragment,
+        R.id.settingsFragment
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupToolbar()
         setupBottomNavigationView()
         setupOpenEditorButton()
         addOnChangedDestinationListener()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
+
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.itemsFragment,
+                R.id.bookmarksFragment,
+                R.id.settingsFragment
+            )
+        )
+
+        toolbar.setupWithNavController(navigationController, appBarConfiguration)
     }
 
     private fun setupBottomNavigationView() {
@@ -35,6 +57,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun addOnChangedDestinationListener() {
         navigationController.addOnDestinationChangedListener { _, destination, _ ->
+            setBottomNavigationVisibility(destination)
+            setupToolbarVisibility(destination)
             when (destination.id) {
                 R.id.editorFragment -> {
                     bottomNavigationView.visibility = View.GONE
@@ -57,6 +81,20 @@ class MainActivity : AppCompatActivity() {
                     openEditorButton.text = getText(R.string.open_editor)
                 }
             }
+        }
+    }
+
+    private fun setupToolbarVisibility(currentDestination: NavDestination) {
+        when(currentDestination.id) {
+            in destinationsWithVisibleToolbar -> supportActionBar?.show()
+            else -> supportActionBar?.hide()
+        }
+    }
+
+    private fun setBottomNavigationVisibility(currentDestination: NavDestination) {
+        bottomNavigationView.visibility = when(currentDestination.id) {
+            R.id.editorFragment -> View.GONE
+            else -> View.VISIBLE
         }
     }
 

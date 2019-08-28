@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_items"
+    android:label="Items"
     app:startDestination="@id/itemsFragment">
 
     <fragment
         android:id="@+id/itemsFragment"
         android:name="br.pedroso.navigationtest.items.ItemsFragment"
-        android:label="Home"
+        android:label="Items"
         tools:layout="@layout/fragment_items">
         <action
             android:id="@+id/action_display_number_from_home"
