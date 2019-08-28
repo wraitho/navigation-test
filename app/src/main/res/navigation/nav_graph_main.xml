@@ -7,7 +7,10 @@
     <action
         android:id="@+id/action_global_open_editor"
         app:destination="@id/navigation_editor"
-        app:enterAnim="@anim/nav_default_enter_anim" />
+        app:enterAnim="@anim/slide_in_bottom"
+        app:exitAnim="@anim/slide_out_bottom"
+        app:popEnterAnim="@anim/slide_in_bottom"
+        app:popExitAnim="@anim/slide_out_bottom"/>
 
     <include app:graph="@navigation/nav_graph_settings" />
 
