@@ -13,8 +13,7 @@
         android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
         android:layout_marginBottom="@dimen/toolbar_margin_vertical"
         app:cardCornerRadius="@dimen/toolbar_corner_radius"
-        app:elevation="@dimen/toolbar_default_elevation"
-        android:transitionName="@string/transition_search_toolbar">
+        app:elevation="@dimen/toolbar_default_elevation">
 
         <LinearLayout
             android:layout_width="match_parent"
