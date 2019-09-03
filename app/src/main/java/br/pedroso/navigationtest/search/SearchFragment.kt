@@ -6,6 +6,8 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import br.pedroso.navigationtest.R
@@ -21,12 +23,7 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false).also {
-            it.toolbar.setNavigationOnClickListener {
-                it.hideKeyboard()
-                findNavController().popBackStack()
-            }
-        }
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,6 +34,17 @@ class SearchFragment : Fragment() {
             showKeyboard()
         }
 
+        backImageView.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    view.hideKeyboard()
+                    findNavController().popBackStack()
+                }
+            })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
