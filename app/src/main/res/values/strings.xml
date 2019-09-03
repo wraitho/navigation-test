@@ -6,4 +6,7 @@
     <string name="display_details">Display details</string>
     <string name="open_editor">Open Editor</string>
     <string name="close_editor">Close Editor</string>
+    <string name="search">Search</string>
+    <string name="transition_search_toolbar">transition_search_toolbar</string>
+    <string name="transition_search_text">transition_search_text</string>
 </resources>

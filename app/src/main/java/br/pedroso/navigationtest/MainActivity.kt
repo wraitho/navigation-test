@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupBottomNavigationView() {
         bottomNavigationView.setupWithNavController(navigationController)
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            onNavDestinationSelected(item, navigationController)
-        }
+//        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+//            onNavDestinationSelected(item, navigationController)
+//        }
     }
 
     private fun addOnChangedDestinationListener() {
