@@ -8,12 +8,17 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.pedroso.navigationtest.R
+import br.pedroso.navigationtest.entities.Item
 import br.pedroso.navigationtest.sharedToolbar.SetupSharedToolbarDelegate
 import kotlinx.android.synthetic.main.fragment_items.*
 import kotlinx.android.synthetic.main.view_search_toolbar.*
 
 class ItemsFragment : Fragment() {
+
+    private val itemsAdapter = ItemsAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,9 +30,7 @@ class ItemsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        displayDetailsButton.setOnClickListener {
-            findNavController().navigate(R.id.detailsFragment)
-        }
+        setupRecyclerView()
 
         SetupSharedToolbarDelegate.setupSearchQueryEditText(
             findNavController(),
@@ -35,4 +38,27 @@ class ItemsFragment : Fragment() {
             searchQueryEditText
         )
     }
+
+    private fun setupRecyclerView() {
+        itemsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = itemsAdapter
+        }
+
+        val items = createFakeItems()
+
+        itemsAdapter.submitList(items)
+    }
+
+    private fun createFakeItems(amountOfItems : Int = 100): List<Item> {
+        return (1..amountOfItems).map { id ->
+            Item(
+                id = id,
+                title = "Item $id",
+                description = "Description for $id"
+            )
+        }
+    }
+
+
 }

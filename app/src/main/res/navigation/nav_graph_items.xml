@@ -11,7 +11,7 @@
         android:label="Home"
         tools:layout="@layout/fragment_items">
         <action
-            android:id="@+id/action_display_number_from_home"
+            android:id="@+id/action_display_item_details"
             app:destination="@id/detailsFragment" />
     </fragment>
 
@@ -20,7 +20,11 @@
         android:name="br.pedroso.navigationtest.details.DetailsFragment"
         android:label="Details"
         tools:layout="@layout/fragment_details">
-
+        <argument
+            android:name="item"
+            app:argType="br.pedroso.navigationtest.entities.Item"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
 </navigation>
