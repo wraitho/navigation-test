@@ -9,5 +9,12 @@
         android:id="@+id/bookmarksFragment"
         android:name="br.pedroso.navigationtest.bookmarks.BookmarksFragment"
         android:label="Bookmarks"
-        tools:layout="@layout/fragment_bookmarks" />
+        tools:layout="@layout/fragment_bookmarks">
+
+        <deepLink app:uri="https://www.navtest.com/bookmarks" />
+        <deepLink app:uri="https://www.navtest.com/{region_code}/bookmarks" />
+        <deepLink app:uri="https://www.navtest.com/{region_code}/favoritos" />
+    </fragment>
+
+
 </navigation>

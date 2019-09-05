@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="compose"
+        android:enabled="true"
+        android:icon="@drawable/ic_star"
+        android:shortcutShortLabel="@string/title_bookmarks"
+        android:shortcutLongLabel="@string/title_bookmarks">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="br.pedroso.navigationtest"
+            android:targetClass="br.pedroso.navigationtest.MainActivity"
+            android:data="https://www.navtest.com/bookmarks" />
+
+
+        <categories android:name="android.shortcut.bookmarks" />
+    </shortcut>
+</shortcuts>
