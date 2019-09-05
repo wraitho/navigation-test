@@ -8,6 +8,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
+import br.pedroso.navigationtest.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_shared_element.*
 
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addOnChangedDestinationListener() {
         navigationController.addOnDestinationChangedListener { _, destination, _ ->
+            bottomNavigationView.hideKeyboard()
             when (destination.id) {
                 R.id.editorFragment -> {
                     bottomNavigationView.visibility = View.GONE

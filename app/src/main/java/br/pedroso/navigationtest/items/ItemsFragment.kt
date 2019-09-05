@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.entities.Item
-import br.pedroso.navigationtest.sharedToolbar.SetupSharedToolbarDelegate
+import br.pedroso.navigationtest.searchToolbar.setupSearchQueryEditText
 import kotlinx.android.synthetic.main.fragment_items.*
 import kotlinx.android.synthetic.main.view_search_toolbar.*
 
@@ -32,11 +30,7 @@ class ItemsFragment : Fragment() {
 
         setupRecyclerView()
 
-        SetupSharedToolbarDelegate.setupSearchQueryEditText(
-            findNavController(),
-            resources,
-            searchQueryEditText
-        )
+        setupSearchQueryEditText(findNavController(), resources, searchQueryEditText)
     }
 
     private fun setupRecyclerView() {
@@ -50,7 +44,7 @@ class ItemsFragment : Fragment() {
         itemsAdapter.submitList(items)
     }
 
-    private fun createFakeItems(amountOfItems : Int = 100): List<Item> {
+    private fun createFakeItems(amountOfItems: Int = 100): List<Item> {
         return (1..amountOfItems).map { id ->
             Item(
                 id = id,
