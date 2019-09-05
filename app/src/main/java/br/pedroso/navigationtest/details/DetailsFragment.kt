@@ -4,15 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.fragment.navArgs
+import br.pedroso.navigationtest.NavigationTestApplication
 import br.pedroso.navigationtest.R
+import br.pedroso.navigationtest.entities.Item
+import br.pedroso.navigationtest.items.ItemsFragmentDirections
+import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_details.view.*
 
 class DetailsFragment : Fragment() {
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_details, container, false)
     }
 
@@ -24,6 +35,35 @@ class DetailsFragment : Fragment() {
         args.item?.run {
             view.titleTextView.text = title
             view.descriptionTextView.text = description
+            setupTestNotificationButton(this)
         }
+    }
+
+    private fun setupTestNotificationButton(item: Item) {
+        testNotificationButton.setOnClickListener {
+            val args = ItemsFragmentDirections.actionDisplayItemDetails(item).arguments
+
+            val pendingIntent = NavDeepLinkBuilder(requireContext())
+                .setGraph(R.navigation.nav_graph_main)
+                .setDestination(R.id.detailsFragment)
+                .setArguments(args)
+                .createPendingIntent()
+
+            val builder = NotificationCompat.Builder(requireContext(),NavigationTestApplication.CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_info)
+                .setContentTitle(item.title)
+                .setContentText(item.description)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+
+            with(NotificationManagerCompat.from(requireContext())) {
+                notify(DETAILS_NOTIFICATION_ID, builder.build())
+            }
+        }
+    }
+
+    companion object {
+        private const val DETAILS_NOTIFICATION_ID = 123456789
     }
 }
