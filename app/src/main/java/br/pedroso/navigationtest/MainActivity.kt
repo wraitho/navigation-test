@@ -4,10 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
+import br.pedroso.navigationtest.extensions.hideKeyboard
+import br.pedroso.navigationtest.sharedElement.Hidden
+import br.pedroso.navigationtest.sharedElement.SharedElementViewModel
+import br.pedroso.navigationtest.sharedElement.Visible
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_shared_element.*
 
@@ -17,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         Navigation.findNavController(this, R.id.navigationRootFragment)
     }
 
+    private val sharedElementViewModel by lazy {
+        ViewModelProviders.of(this)[SharedElementViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,6 +34,13 @@ class MainActivity : AppCompatActivity() {
         setupBottomNavigationView()
         setupOpenEditorButton()
         addOnChangedDestinationListener()
+
+        sharedElementViewModel.visibilityState.observe(this, Observer { visibilityState ->
+            when(visibilityState) {
+                Visible -> { sharedElementRoot.visibility = View.VISIBLE }
+                Hidden -> { sharedElementRoot.visibility = View.GONE }
+            }
+        })
     }
 
     private fun setupBottomNavigationView() {
@@ -35,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addOnChangedDestinationListener() {
         navigationController.addOnDestinationChangedListener { _, destination, _ ->
+            bottomNavigationView.hideKeyboard()
             when (destination.id) {
                 R.id.editorFragment -> {
                     bottomNavigationView.visibility = View.GONE

@@ -8,11 +8,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import br.pedroso.navigationtest.R
-import br.pedroso.navigationtest.sharedToolbar.SetupSharedToolbarDelegate
+import br.pedroso.navigationtest.searchToolbar.setupSearchQueryEditText
 import kotlinx.android.synthetic.main.view_search_toolbar.*
 
 class BookmarksFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_bookmarks, container, false)
     }
 
@@ -29,15 +33,7 @@ class BookmarksFragment : Fragment() {
             }
         }
 
-        if(arguments?.containsKey(KEY_REGION_CODE) == true) {
-
-        }
-
-        SetupSharedToolbarDelegate.setupSearchQueryEditText(
-            findNavController(),
-            resources,
-            searchQueryEditText
-        )
+        setupSearchQueryEditText(findNavController(), resources, searchQueryEditText)
     }
 
     companion object {

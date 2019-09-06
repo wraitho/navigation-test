@@ -4,20 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.entities.Item
-import br.pedroso.navigationtest.sharedToolbar.SetupSharedToolbarDelegate
+import br.pedroso.navigationtest.searchToolbar.setupSearchQueryEditText
+import br.pedroso.navigationtest.sharedElement.SharedElementViewModel
 import kotlinx.android.synthetic.main.fragment_items.*
 import kotlinx.android.synthetic.main.view_search_toolbar.*
 
 class ItemsFragment : Fragment() {
 
     private val itemsAdapter = ItemsAdapter()
+
+    private val sharedElementViewModel by lazy {
+        ViewModelProviders.of(requireActivity())[SharedElementViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,11 +37,22 @@ class ItemsFragment : Fragment() {
 
         setupRecyclerView()
 
-        SetupSharedToolbarDelegate.setupSearchQueryEditText(
-            findNavController(),
-            resources,
-            searchQueryEditText
-        )
+        setupSearchQueryEditText(findNavController(), resources, searchQueryEditText)
+
+        (dummyView.layoutParams as? CoordinatorLayout.LayoutParams)?.run {
+            (behavior as? NestedScrollListenerBehaviour)?.run {
+                setNestedScrollListener(object :
+                    NestedScrollListenerBehaviour.NestedScrollListener {
+                    override fun onScrollDown() {
+                        sharedElementViewModel.hideSharedElement()
+                    }
+
+                    override fun onScrollUp() {
+                        sharedElementViewModel.displaySharedElement()
+                    }
+                })
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -50,7 +66,7 @@ class ItemsFragment : Fragment() {
         itemsAdapter.submitList(items)
     }
 
-    private fun createFakeItems(amountOfItems : Int = 100): List<Item> {
+    private fun createFakeItems(amountOfItems: Int = 100): List<Item> {
         return (1..amountOfItems).map { id ->
             Item(
                 id = id,
