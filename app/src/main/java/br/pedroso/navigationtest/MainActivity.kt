@@ -7,13 +7,9 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
-import br.pedroso.navigationtest.extensions.hideKeyboard
-import br.pedroso.navigationtest.sharedElement.Hidden
-import br.pedroso.navigationtest.sharedElement.SharedElementViewModel
-import br.pedroso.navigationtest.sharedElement.Visible
+import br.pedroso.navigationtest.extensions.*
+import br.pedroso.navigationtest.screen.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_shared_element.*
 
@@ -24,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val sharedElementViewModel by lazy {
-        ViewModelProviders.of(this)[SharedElementViewModel::class.java]
+        ViewModelProviders.of(this)[ScreenViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +31,51 @@ class MainActivity : AppCompatActivity() {
         setupOpenEditorButton()
         addOnChangedDestinationListener()
 
-        sharedElementViewModel.visibilityState.observe(this, Observer { visibilityState ->
-            when(visibilityState) {
-                Visible -> { sharedElementRoot.visibility = View.VISIBLE }
-                Hidden -> { sharedElementRoot.visibility = View.GONE }
+        setupSharedElementVisibilityStateObserver()
+        setupBottomBarVisibilityStateObserver()
+        setupFullScreenModeStateObserver()
+    }
+
+    private fun setupFullScreenModeStateObserver() {
+        sharedElementViewModel.fullScreenModeState.observe(this, Observer { state ->
+            when(state){
+                FullScreenMode.Disabled -> resetFullscreenSettings()
+                FullScreenMode.ContentUnderSystemBars -> enableContentUnderSystemBars()
+                FullScreenMode.LeanBack -> enableFullscreenLeanback()
+                FullScreenMode.Immersive -> enableFullscreenImmersive()
+                FullScreenMode.ImmersiveSticky -> enableFullscreenStickyImmersive()
             }
         })
+    }
+
+    private fun setupSharedElementVisibilityStateObserver() {
+        sharedElementViewModel.sharedElementVisibility.observe(
+            this,
+            Observer { visibilityState ->
+                when (visibilityState) {
+                    SharedElementVisibility.Visible -> {
+                        sharedElementRoot.visibility = View.VISIBLE
+                    }
+                    SharedElementVisibility.Hidden -> {
+                        sharedElementRoot.visibility = View.GONE
+                    }
+                }
+            })
+    }
+
+    private fun setupBottomBarVisibilityStateObserver() {
+        sharedElementViewModel.bottomBarVisibilityState.observe(
+            this,
+            Observer { visibilityState ->
+                when (visibilityState) {
+                    BottomBarVisibilityState.Visible -> {
+                        bottomNavigationView.visibility = View.VISIBLE
+                    }
+                    BottomBarVisibilityState.Hidden -> {
+                        bottomNavigationView.visibility = View.GONE
+                    }
+                }
+            })
     }
 
     private fun setupBottomNavigationView() {

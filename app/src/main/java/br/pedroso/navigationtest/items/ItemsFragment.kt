@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.entities.Item
 import br.pedroso.navigationtest.searchToolbar.setupSearchQueryEditText
-import br.pedroso.navigationtest.sharedElement.SharedElementViewModel
+import br.pedroso.navigationtest.screen.ScreenViewModel
 import kotlinx.android.synthetic.main.fragment_items.*
 import kotlinx.android.synthetic.main.view_search_toolbar.*
 
@@ -20,8 +20,8 @@ class ItemsFragment : Fragment() {
 
     private val itemsAdapter = ItemsAdapter()
 
-    private val sharedElementViewModel by lazy {
-        ViewModelProviders.of(requireActivity())[SharedElementViewModel::class.java]
+    private val screenViewModel by lazy {
+        ViewModelProviders.of(requireActivity())[ScreenViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -44,11 +44,11 @@ class ItemsFragment : Fragment() {
                 setNestedScrollListener(object :
                     NestedScrollListenerBehaviour.NestedScrollListener {
                     override fun onScrollDown() {
-                        sharedElementViewModel.hideSharedElement()
+                        screenViewModel.hideSharedElement()
                     }
 
                     override fun onScrollUp() {
-                        sharedElementViewModel.displaySharedElement()
+                        screenViewModel.displaySharedElement()
                     }
                 })
             }
