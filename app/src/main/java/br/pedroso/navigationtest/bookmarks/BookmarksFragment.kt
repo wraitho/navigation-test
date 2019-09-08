@@ -6,12 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.searchToolbar.setupSearchQueryEditText
+import kotlinx.android.synthetic.main.fragment_bookmarks.*
 import kotlinx.android.synthetic.main.view_search_toolbar.*
 
 class BookmarksFragment : Fragment() {
+
+    private val navigationController by lazy {
+        findNavController()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +41,10 @@ class BookmarksFragment : Fragment() {
         }
 
         setupSearchQueryEditText(findNavController(), resources, searchQueryEditText)
+
+        openImageButton.setOnClickListener {
+            navigationController.navigate(R.id.action_global_open_image)
+        }
     }
 
     companion object {

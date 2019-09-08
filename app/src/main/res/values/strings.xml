@@ -12,4 +12,6 @@
     <string name="test_notification">Send test notification</string>
     <string name="channel_name">Items</string>
     <string name="channel_description">Test channel to validate deeplinks.</string>
+    <string name="open_image">Open Image</string>
+    <string name="sample_text">This is a sample image!</string>
 </resources>

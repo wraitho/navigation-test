@@ -36,16 +36,18 @@ class SearchFragment : Fragment() {
         }
 
         backImageView.setOnClickListener {
-            requireActivity().onBackPressed()
+            navigateBack()
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    view.hideKeyboard()
-                    findNavController().popBackStack()
-                }
+                override fun handleOnBackPressed() = navigateBack()
             })
+    }
+
+    fun navigateBack() {
+        view?.hideKeyboard()
+        findNavController().popBackStack()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
