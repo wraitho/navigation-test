@@ -14,4 +14,6 @@
     <string name="channel_description">Test channel to validate deeplinks.</string>
     <string name="open_image">Open Image</string>
     <string name="sample_text">This is a sample image!</string>
+    <string name="display_warning">Display Warning</string>
+    <string name="warning_text">This is a warning dialog!</string>
 </resources>
