@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_display_warning_dialog"
             app:destination="@id/warningFragment" />
+
+        <action
+            android:id="@+id/action_display_bottom_warning_dialog"
+            app:destination="@id/bottomWarningFragment" />
     </fragment>
 
     <dialog
@@ -21,6 +25,13 @@
         android:name="br.pedroso.navigationtest.warning.WarningDialogFragment"
         android:label="Warning"
         tools:layout="@layout/fragment_warning" />
+
+    <dialog
+        android:id="@+id/bottomWarningFragment"
+        android:name="br.pedroso.navigationtest.warning.BottomWarningDialogFragment"
+        android:label="Bottom Warning"
+        tools:layout="@layout/fragment_warning" />
+
 
 
 </navigation>
