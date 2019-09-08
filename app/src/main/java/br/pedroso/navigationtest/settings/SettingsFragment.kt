@@ -28,5 +28,9 @@ class SettingsFragment : Fragment() {
         displayWarningButton.setOnClickListener {
             findNavController().navigate(R.id.warningFragment)
         }
+
+        displayBottomWarningButton.setOnClickListener {
+            findNavController().navigate(R.id.bottomWarningFragment)
+        }
     }
 }
