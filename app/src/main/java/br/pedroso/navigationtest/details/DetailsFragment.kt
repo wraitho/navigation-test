@@ -1,14 +1,12 @@
 package br.pedroso.navigationtest.details
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.fragment.navArgs
+import br.pedroso.navigationtest.BaseFragment
 import br.pedroso.navigationtest.NavigationTestApplication
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.entities.Item
@@ -16,16 +14,7 @@ import br.pedroso.navigationtest.items.ItemsFragmentDirections
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_details.view.*
 
-class DetailsFragment : Fragment() {
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_details, container, false)
-    }
+class DetailsFragment : BaseFragment(R.layout.fragment_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

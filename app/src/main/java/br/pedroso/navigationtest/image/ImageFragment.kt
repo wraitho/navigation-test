@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import br.pedroso.navigationtest.BaseFragment
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.screen.FullScreenMode
 import br.pedroso.navigationtest.screen.ScreenViewModel
 import kotlinx.android.synthetic.main.fragment_image.*
 
 
-class ImageFragment : Fragment() {
+class ImageFragment : BaseFragment(R.layout.fragment_image) {
 
     private val screenViewModel by lazy {
         ViewModelProviders.of(requireActivity())[ScreenViewModel::class.java]
@@ -29,7 +29,7 @@ class ImageFragment : Fragment() {
             hideSharedElement()
             hideBottomBar()
         }
-        return inflater.inflate(R.layout.fragment_image, container, false)
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
