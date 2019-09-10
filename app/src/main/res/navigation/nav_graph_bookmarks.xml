@@ -14,7 +14,16 @@
         <deepLink app:uri="https://www.navtest.com/bookmarks" />
         <deepLink app:uri="https://www.navtest.com/{region_code}/bookmarks" />
         <deepLink app:uri="https://www.navtest.com/{region_code}/favoritos" />
+
+        <action
+            android:id="@+id/action_open_image"
+            app:destination="@id/imageFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="br.pedroso.navigationtest.image.ImageFragment"
+        android:label="Image"
+        tools:layout="@layout/fragment_image" />
 
 </navigation>
