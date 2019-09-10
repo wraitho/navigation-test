@@ -13,6 +13,7 @@ import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.entities.Item
 import br.pedroso.navigationtest.searchToolbar.setupSearchQueryEditText
 import br.pedroso.navigationtest.screen.ScreenViewModel
+import br.pedroso.navigationtest.screen.setupSharedElementBehaviour
 import kotlinx.android.synthetic.main.fragment_items.*
 import kotlinx.android.synthetic.main.view_search_toolbar.*
 
@@ -37,22 +38,14 @@ class ItemsFragment : Fragment() {
 
         setupRecyclerView()
 
-        setupSearchQueryEditText(findNavController(), resources, searchQueryEditText)
+        setupSearchQueryEditText(
+            findNavController(),
+            resources,
+            searchQueryEditText,
+            profileImageView
+        )
 
-        (dummyView.layoutParams as? CoordinatorLayout.LayoutParams)?.run {
-            (behavior as? NestedScrollListenerBehaviour)?.run {
-                setNestedScrollListener(object :
-                    NestedScrollListenerBehaviour.NestedScrollListener {
-                    override fun onScrollDown() {
-                        screenViewModel.hideSharedElement()
-                    }
-
-                    override fun onScrollUp() {
-                        screenViewModel.displaySharedElement()
-                    }
-                })
-            }
-        }
+        setupSharedElementBehaviour(dummyView, screenViewModel)
     }
 
     private fun setupRecyclerView() {

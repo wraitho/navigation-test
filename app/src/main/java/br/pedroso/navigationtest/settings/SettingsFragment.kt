@@ -23,7 +23,12 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupSearchQueryEditText(findNavController(), resources, searchQueryEditText)
+        setupSearchQueryEditText(
+            findNavController(),
+            resources,
+            searchQueryEditText,
+            profileImageView
+        )
 
         displayWarningButton.setOnClickListener {
             findNavController().navigate(R.id.warningFragment)

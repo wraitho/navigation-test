@@ -14,14 +14,18 @@
         app:popExitAnim="@anim/slide_out_bottom" />
 
     <action
-        android:id="@+id/action_global_open_image"
-        app:destination="@id/imageFragment" />
-
-    <action
         android:id="@+id/action_global_open_search"
         app:destination="@id/navigation_search" />
 
-    <include app:graph="@navigation/nav_graph_settings" />
+    <action
+        android:id="@+id/action_global_open_profile"
+        app:destination="@id/profileFragment" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="br.pedroso.navigationtest.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
 
     <include app:graph="@navigation/nav_graph_items" />
 
@@ -31,10 +35,6 @@
 
     <include app:graph="@navigation/nav_graph_search" />
 
-    <fragment
-        android:id="@+id/imageFragment"
-        android:name="br.pedroso.navigationtest.image.ImageFragment"
-        android:label="Image"
-        tools:layout="@layout/fragment_image" />
+    <include app:graph="@navigation/nav_graph_settings" />
 
 </navigation>

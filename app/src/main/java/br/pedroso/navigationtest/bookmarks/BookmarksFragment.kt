@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.searchToolbar.setupSearchQueryEditText
@@ -40,10 +39,15 @@ class BookmarksFragment : Fragment() {
             }
         }
 
-        setupSearchQueryEditText(findNavController(), resources, searchQueryEditText)
+        setupSearchQueryEditText(
+            findNavController(),
+            resources,
+            searchQueryEditText,
+            profileImageView
+        )
 
         openImageButton.setOnClickListener {
-            navigationController.navigate(R.id.action_global_open_image)
+            navigationController.navigate(R.id.action_open_image)
         }
     }
 
