@@ -11,6 +11,7 @@ import androidx.activity.addCallback
 import androidx.core.app.NavUtils
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import br.pedroso.navigationtest.BaseFragment
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.extensions.hideKeyboard
 import br.pedroso.navigationtest.extensions.showKeyboard
@@ -18,14 +19,7 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 
 
-class SearchFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
+class SearchFragment : BaseFragment(R.layout.fragment_search) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
