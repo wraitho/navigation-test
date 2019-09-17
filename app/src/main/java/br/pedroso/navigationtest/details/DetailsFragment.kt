@@ -39,9 +39,9 @@ class DetailsFragment : BaseFragment(R.layout.fragment_details) {
                 .createPendingIntent()
 
             val builder = NotificationCompat.Builder(requireContext(),NavigationTestApplication.CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_info)
                 .setContentTitle(item.title)
                 .setContentText(item.description)
+                .setSmallIcon(R.drawable.ic_info)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
