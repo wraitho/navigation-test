@@ -27,5 +27,18 @@
         android:layout_height="wrap_content"
         android:text="@string/test_notification" />
 
+    <Button
+        android:id="@+id/addToMyItemsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_my_items" />
+
+    <Button
+        android:id="@+id/removeFromMyItemsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remove_from_my_items" />
+
+
 
 </LinearLayout>

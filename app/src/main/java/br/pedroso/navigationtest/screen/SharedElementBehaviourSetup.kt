@@ -4,7 +4,7 @@ import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import br.pedroso.navigationtest.items.NestedScrollListenerBehaviour
 
-fun setupSharedElementBehaviour(view: View, screenViewModel: ScreenViewModel) {
+fun bindNestedScrollBehaviourWithViewModel(view: View, screenViewModel: ScreenViewModel) {
     view.layoutParams
         .let { it as? CoordinatorLayout.LayoutParams }
         .let { it?.behavior as? NestedScrollListenerBehaviour }
@@ -12,11 +12,11 @@ fun setupSharedElementBehaviour(view: View, screenViewModel: ScreenViewModel) {
             setNestedScrollListener(object :
                 NestedScrollListenerBehaviour.NestedScrollListener {
                 override fun onScrollDown() {
-                    screenViewModel.hideSharedElement()
+                    screenViewModel.hideBottomBar()
                 }
 
                 override fun onScrollUp() {
-                    screenViewModel.displaySharedElement()
+                    screenViewModel.displayBottomBar()
                 }
             })
         }

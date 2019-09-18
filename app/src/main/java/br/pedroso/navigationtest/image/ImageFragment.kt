@@ -10,6 +10,7 @@ import br.pedroso.navigationtest.BaseFragment
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.screen.FullScreenMode
 import br.pedroso.navigationtest.screen.ScreenViewModel
+import br.pedroso.navigationtest.sharedElement.SharedElementViewModel
 import kotlinx.android.synthetic.main.fragment_image.*
 
 
@@ -19,14 +20,18 @@ class ImageFragment : BaseFragment(R.layout.fragment_image) {
         ViewModelProviders.of(requireActivity())[ScreenViewModel::class.java]
     }
 
+    private val sharedElementViewModel by lazy {
+        ViewModelProviders.of(requireActivity())[SharedElementViewModel::class.java]
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        screenViewModel.apply {
+        sharedElementViewModel.hideSharedElement()
+        screenViewModel.run {
             setFullScreenMode(FullScreenMode.ContentUnderSystemBars)
-            hideSharedElement()
             hideBottomBar()
         }
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -42,9 +47,9 @@ class ImageFragment : BaseFragment(R.layout.fragment_image) {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        screenViewModel.apply {
+        sharedElementViewModel.displaySharedElement()
+        screenViewModel.run {
             setFullScreenMode(FullScreenMode.Disabled)
-            displaySharedElement()
             displayBottomBar()
         }
     }

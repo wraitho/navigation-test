@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.screen.ScreenViewModel
-import br.pedroso.navigationtest.screen.setupSharedElementBehaviour
+import br.pedroso.navigationtest.screen.bindNestedScrollBehaviourWithViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -19,7 +19,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupSharedElementBehaviour(dummyView, screenViewModel)
+        bindNestedScrollBehaviourWithViewModel(dummyView, screenViewModel)
 
         toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()

@@ -9,7 +9,7 @@ import br.pedroso.navigationtest.BaseFragment
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.entities.Item
 import br.pedroso.navigationtest.screen.ScreenViewModel
-import br.pedroso.navigationtest.screen.setupSharedElementBehaviour
+import br.pedroso.navigationtest.screen.bindNestedScrollBehaviourWithViewModel
 import br.pedroso.navigationtest.searchToolbar.setupSearchQueryEditText
 import kotlinx.android.synthetic.main.fragment_items.*
 import kotlinx.android.synthetic.main.view_search_toolbar.*
@@ -34,7 +34,7 @@ class ItemsFragment : BaseFragment(R.layout.fragment_items) {
             profileImageView
         )
 
-        setupSharedElementBehaviour(dummyView, screenViewModel)
+        bindNestedScrollBehaviourWithViewModel(dummyView, screenViewModel)
     }
 
     private fun setupRecyclerView() {
