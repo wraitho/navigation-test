@@ -9,7 +9,7 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="br.pedroso.navigationtest"
-            android:targetClass="br.pedroso.navigationtest.MainActivity"
+            android:targetClass="br.pedroso.navigationtest.home.HomeActivity"
             android:data="https://www.navtest.com/bookmarks" />
 
 

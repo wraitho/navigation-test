@@ -1,4 +1,4 @@
-package br.pedroso.navigationtest
+package br.pedroso.navigationtest.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,12 +8,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
+import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.extensions.*
 import br.pedroso.navigationtest.screen.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.view_shared_element.*
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private val navigationController by lazy {
         Navigation.findNavController(this, R.id.navigationRootFragment)
