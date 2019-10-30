@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import br.pedroso.navigationtest.R
 import br.pedroso.navigationtest.entities.Item
 
-class ItemsAdapter : ListAdapter<Item, ItemViewHolder>(DIFF_CALLBACK) {
+class ItemsAdapter(private val eventHandler: ItemsViewEventHandler) :
+    ListAdapter<Item, ItemViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
@@ -18,7 +19,7 @@ class ItemsAdapter : ListAdapter<Item, ItemViewHolder>(DIFF_CALLBACK) {
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, eventHandler)
     }
 
     companion object {

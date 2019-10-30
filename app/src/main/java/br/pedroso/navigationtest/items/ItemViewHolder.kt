@@ -10,14 +10,16 @@ import br.pedroso.navigationtest.entities.Item
 import kotlinx.android.synthetic.main.view_item.view.*
 
 class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    fun bind(item: Item) {
+    fun bind(item: Item, eventHandler: ItemsViewEventHandler) {
         itemView.apply {
             titleTextView.text = item.title
             descriptionTextView.text = item.description
 
             setOnClickListener {
-                val action = ItemsFragmentDirections.actionDisplayItemDetails(item)
-                findNavController().navigate(action)
+                eventHandler.onViewEvent(ItemsViewEvent.OnItemClicked(item) {
+                    val action = ItemsFragmentDirections.actionDisplayItemDetails(item)
+                    findNavController().navigate(action)
+                })
             }
         }
     }

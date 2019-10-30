@@ -2,10 +2,9 @@ package br.pedroso.navigationtest.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import br.pedroso.navigationtest.typealiases.LogFunction
 
-typealias LogFunction = (message: String) -> Unit
-
-class MainViewModel(val log: LogFunction) : ViewModel() {
+class MainViewModel(private val log: LogFunction) : ViewModel() {
 
     fun onViewEvent(viewEvent: HomeViewEvent) {
         when (viewEvent) {

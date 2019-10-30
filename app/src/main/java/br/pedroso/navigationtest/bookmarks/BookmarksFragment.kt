@@ -33,7 +33,9 @@ class BookmarksFragment : BaseFragment(R.layout.fragment_bookmarks) {
             findNavController(),
             resources,
             searchQueryEditText,
-            profileImageView
+            profileImageView,
+            { navigateToSearch -> navigateToSearch() },
+            { navigateToProfile -> navigateToProfile() }
         )
 
         openImageButton.setOnClickListener {

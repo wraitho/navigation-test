@@ -21,7 +21,9 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
             findNavController(),
             resources,
             searchQueryEditText,
-            profileImageView
+            profileImageView,
+            { navigateToSearch -> navigateToSearch() },
+            { navigateToProfile -> navigateToProfile() }
         )
 
         displayWarningButton.setOnClickListener {

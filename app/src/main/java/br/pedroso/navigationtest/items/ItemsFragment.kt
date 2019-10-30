@@ -1,6 +1,7 @@
 package br.pedroso.navigationtest.items
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -16,11 +17,22 @@ import kotlinx.android.synthetic.main.view_search_toolbar.*
 
 class ItemsFragment : BaseFragment(R.layout.fragment_items) {
 
-    private val itemsAdapter = ItemsAdapter()
-
     private val screenViewModel by lazy {
         ViewModelProviders.of(requireActivity())[ScreenViewModel::class.java]
     }
+
+    private val itemsViewModel by lazy {
+        ViewModelProviders.of(
+            this,
+            ItemsViewModel.Factory { message ->
+                Log.d(
+                    "XLog",
+                    message
+                )
+            })[ItemsViewModel::class.java]
+    }
+
+    private val itemsAdapter by lazy { ItemsAdapter(itemsViewModel) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,8 +43,13 @@ class ItemsFragment : BaseFragment(R.layout.fragment_items) {
             findNavController(),
             resources,
             searchQueryEditText,
-            profileImageView
-        )
+            profileImageView,
+            { navigateToSearch ->
+                itemsViewModel.onViewEvent(ItemsViewEvent.OnSearchAction(navigateToSearch))
+            },
+            { navigateToProfile ->
+                itemsViewModel.onViewEvent(ItemsViewEvent.OnProfileClicked(navigateToProfile))
+            })
 
         setupSharedElementBehaviour(dummyView, screenViewModel)
     }
